@@ -1,15 +1,10 @@
-FROM phusion/baseimage:0.9.15
-ENV DEBIAN_FRONTEND=noninteractive
+FROM factual/docker-cdh5-base:java8
 
-#add this for mustache templates in config files
-ADD https://raw.githubusercontent.com/tests-always-included/mo/master/mo /usr/bin/
-RUN chmod +x /usr/bin/mo
-RUN apt-get update;
-
-RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main' >> /etc/apt/sources.list.d/pgdg.list
-RUN sudo apt-get update
+RUN apt-get update
 RUN apt-get install -y wget
 RUN apt-get install -y rsyslog
+
+RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main' >> /etc/apt/sources.list.d/pgdg.list
 RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 RUN sudo apt-get update
 
